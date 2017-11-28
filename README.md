@@ -1,74 +1,82 @@
-# WolfBot, your stock market companion
+Weather Simulator
+========================
 
-WolfBot is your personal stock market companion on Slack! It can fetch your stock information, provide trending data and keep an eye on your watchlist. All done via Natural Language Processing (provided by AWS Lex).
+Author: George Paw
+Date: 29/11/2017
 
-# Add to your Slack channels
-<a href="https://slack.com/oauth/authorize?&client_id=136639530325.213401704019&scope=bot,chat:write:bot,team:read,im:history,channels:history"><img alt="Add to Slack" height="40" width="139" src="https://platform.slack-edge.com/img/add_to_slack.png" srcset="https://platform.slack-edge.com/img/add_to_slack.png 1x, https://platform.slack-edge.com/img/add_to_slack@2x.png 2x" /></a>
-
-## Demo
-
-[Youtube Demo Video](https://www.youtube.com/watch?v=J09vn6q_ijA)
-
-Note: This is my submission for [AWS Chatbot Challenge](https://aws.amazon.com/blogs/aws/announcing-the-aws-chatbot-challenge-create-conversational-intelligent-chatbots-using-amazon-lex-and-aws-lambda/)
-
-## Current Features:
-
-## Spotcheck
-WolfBot can fetch stock information for you when you enter the stock symbol.
-
-![Spotcheck](http://i.imgur.com/RBAPwCE.png)
-
-## Historical Trend
-WolfBot will able to show you historical data and plot it as a trend graph.
-
-![lastdays](http://i.imgur.com/JZpBBxg.png)
-
-It can even take precise dates.
-
-![between](http://i.imgur.com/WvHWS1s.png)
+## Demo Video
+[Demo Video](https://youtu.be/PhBdSMrPRMQ)
 
 
-## Watchlist
+## Introduction
+This is a simple project to simulator weather into a specific output as listed below:
 
-Wolfbot can even help you keep track of your portfolio by sniffing out your watchlist.
+Sydney|-33.86,151.2,39|2017-11-29T01:19:25Z|Sunny|+0|-4.68668655|2
 
-You can add a symbol to the list
+Melbourne|-37.73,144.91,78|2017-11-29T01:19:25Z|Sunny|+0|-9.3733731|53
 
-![add](http://i.imgur.com/zzneOGx.png)
+Adelaide|-34.93,138.58,29|2017-11-29T01:19:25Z|Sunny|+0|-3.48497205|32
 
-Or delete one.
+Location is an optional label describing one or more positions
 
-![delete](http://i.imgur.com/0vzUVLD.png)
+Position is a comma-separated triple containing latitude, longitude, and elevation in metres above sea
 
-And display your watchlist!
+level
 
-![show](http://i.imgur.com/7tIoyaZ.png)
+Local time is an ISO8601 date time
 
+Conditions is either Snow, Rain, Sunny
 
-## Help
-If you ever get stuck, just type in "Help Me" for random tips!
+Temperature is in °C
 
-![help1](http://i.imgur.com/4PpyJDd.png)
+Pressure is in hPa, and
 
-![help2](http://i.imgur.com/3OgNCka.png)
+Relative humidity is a %
 
-## Deployment Instructions
-[Click here](./Deployment.md)
+## Usage:
+1. Install requirements.txt, recommend using virtual environment
+2. Navigate to \master\
+3. Execute in terminal "python GenerateWeather.py"
+4. Follow the command prompts
+5. The script will generate a fixed amount of station data in a datastream format as mentioned above
 
+Optional: run nn.py to generate a new neural network fitting based on CSV file
 
+Theory:
+Output all stations at the same time, data per second is dependent on user.
 
-## Dev Stack
+The time is set to current time and every new datastream is at an hour interval into the future
 
-1.	Python 3.6
-2.	Slack API
-3.	query.yahooapis.com
+This is a unsolicated output stream
 
-## AWS Services Used
-1.	AWS Lex
-2.	AWS Lambda
-3.	AWS DynamoDB
-4.	S3 Bucket
+Used Neural Network to predict temperature, the topology is as below:
 
+Features: Latitude, Longtitude, Elevation, Temperature
 
-## Architecture
-![Architechture](./WolfBot_Chatbot_Architecture.png)
+Output: Temperature
+
+Layer: 1000
+
+Data obtained from https://data.gov.au/dataset/rainfall-and-temperature-forecast-and-observations-hourly-verification-2016-05-to-2017-04/resource/5920f661-79cc-4740-8d76-20cd11f033d4
+
+## Limitation:
+1. Stations are narrowed to 10 cities
+2. Custom values are not working yet
+3. Timezones are not taking into account
+4. Pressure only take into account elevation
+5. Humidity is currently a pseudo-random number generator
+6. Weather condition is a pseudo-random number generator
+
+## Future Improvements:
+1. Use more stations datapoints
+2. Fix custom values
+3. Enable solicated output stream
+4. Take timezones into consideration
+5. Allow python script to take arguments
+6. Construct better test scripts using pytest
+7. Find a better way to generate pressure (e.g. lookup table)
+8. Use rainfall temperature to calculate humidity
+9. Use time as a factor in neural network training
+10. Use neural network training to produce a better weather conditon prediciton
+11. Train neural network better
+
