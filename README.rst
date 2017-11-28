@@ -7,7 +7,9 @@ Date: 29/11/2017
 This is a simple project to simulator weather into a specific output as listed below:
 
 Sydney|-33.86,151.2,39|2017-11-29T01:19:25Z|Sunny|+0|-4.68668655|2
+
 Melbourne|-37.73,144.91,78|2017-11-29T01:19:25Z|Sunny|+0|-9.3733731|53
+
 Adelaide|-34.93,138.58,29|2017-11-29T01:19:25Z|Sunny|+0|-3.48497205|32
 
 Location is an optional label describing one or more positions
@@ -20,7 +22,7 @@ Pressure is in hPa, and
 Relative humidity is a %
 
 Usage:
-1. Install requirements.txt, recommend using virtual environment (uploaded for your convenience)
+1. Install requirements.txt, recommend using virtual environment
 2. Navigate to \master\
 3. Execute in terminal "python GenerateWeather.py"
 4. Follow the command prompts
